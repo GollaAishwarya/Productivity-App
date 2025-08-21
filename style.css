@@ -1,0 +1,8 @@
+/* (your original styles kept) */
+
+/* ADDED: small helpers used by new UI */
+.priority-badge { padding: 2px 8px; border-radius: 12px; font-size: 12px; margin-left: 6px; color: #fff; }
+.priority-badge.low { background: #7fb77e; }
+.priority-badge.medium { background: #f5c26b; color:#333; }
+.priority-badge.high { background: #f27474; }
+.toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #333; color: #fff; padding: 10px 16px; border-radius: 12px; opacity: .95; z-index: 9999; }

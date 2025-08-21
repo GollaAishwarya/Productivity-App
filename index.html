@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome - Productivity App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: lavender;
+      color: white;
+      font-family: 'Fredoka One', cursive;
+      text-align: center;
+      margin: 0;
+    }
+
+    .welcome-container {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 50px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      width: 450px;
+    }
+
+    .welcome-container h1 {
+      margin-bottom: 20px;
+      font-size: 40px;
+    }
+
+    .welcome-container p {
+      margin-bottom: 30px;
+      font-size: 20px;
+    }
+
+    .welcome-buttons button {
+      background: white;
+      color: lavender;
+      font-weight: bold;
+      font-size: 18px;
+      border: none;
+      padding: 12px 20px;
+      margin: 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .welcome-buttons button:hover {
+      background: #f8f8f8;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="welcome-container">
+    <h1> Welcome to Productivity App</h1>
+    <p>Track your tasks, boost your productivity, and compete with friends!</p>
+    <div class="welcome-buttons">
+      <button onclick="window.location.href='login.html'">Login</button>
+      <button onclick="window.location.href='signup.html'">Signup</button>
+    </div>
+  </div>
+</body>
+</html>

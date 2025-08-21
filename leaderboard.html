@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Leaderboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Fredoka One', cursive;
+      background-color: lavender;
+      color: white;
+      text-align: center;
+      padding: 30px;
+    }
+    .leaderboard-title {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+    .controls {
+      margin: 15px 0;
+    }
+    .controls input, 
+    .controls button {
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      font-family: 'Fredoka One', cursive;
+      margin: 5px;
+    }
+    .controls button {
+      background: #ff5722;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .controls button:hover {
+      background: #e64a19;
+    }
+    #leaderboard-container {
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .leaderboard-item {
+      background: rgba(255,255,255,0.2);
+      padding: 12px 20px;
+      border-radius: 12px;
+      width: 60%;
+      max-width: 500px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+  </style>
+</head>
+<body class="leaderboard-page">
+  <h1 class="leaderboard-title">🏆 Productivity Leaderboard 🏆</h1>
+
+  <!-- Controls -->
+  <div class="controls">
+    <label><input type="checkbox" id="friends-only"/> Friends Only</label>
+  </div>
+
+  <div class="controls">
+    <input id="friend-email" type="email" placeholder="Friend email"/>
+    <button onclick="sendFriendRequest()">Add Friend</button>
+  </div>
+
+  <div class="controls">
+    <strong>Friend Requests:</strong>
+    <ul id="friend-requests"></ul>
+  </div>
+
+  <div id="leaderboard-container" class="leaderboard-container">
+    <!-- Filled by JS -->
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

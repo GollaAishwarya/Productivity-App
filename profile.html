@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile - Productivity App</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <style>
+    body { margin:0; font-family:'Fredoka One', cursive; background-color:lavender; color:white; display:flex; justify-content:center; align-items:center; height:100vh; }
+    .profile-container { background:rgba(255,255,255,0.2); padding:30px; border-radius:15px; width:420px; text-align:center; box-shadow:0 8px 32px rgba(0,0,0,0.2); }
+    .profile-pic { width:100px; height:100px; border-radius:50%; margin-bottom:10px; object-fit:cover; border:3px solid white; }
+    input[type="text"], input[type="file"], input[type="password"], input[type="email"] { width:90%; padding:10px; margin:8px 0; border-radius:8px; border:none; font-size:16px; }
+    button { background:#ff5722; color:white; border:none; padding:10px 20px; margin:10px 0; width:100%; font-size:16px; border-radius:10px; cursor:pointer; transition:background 0.3s; }
+    button:hover { background:#e64a19; }
+    .stats { margin-top:20px; font-size:14px; }
+    .back-btn { background:white; color:#ff5722; margin-top:15px; }
+  </style>
+</head>
+<body>
+  <div class="profile-container">
+    <h2>My Profile</h2>
+    <img id="profile-pic" class="profile-pic" src="https://via.placeholder.com/100" alt="Profile Picture">
+
+    <form id="upload-form" enctype="multipart/form-data">
+      <input type="file" name="profilePic" id="profile-pic-input" accept="image/*" />
+      <button type="submit">Upload Picture</button>
+    </form>
+
+    <input type="text" id="profile-name" placeholder="Full Name" />
+    <p>Email: <span id="profile-email"></span></p>
+    <!-- ADDED: update email -->
+    <input type="email" id="new-email" placeholder="New Email (optional)"/>
+    <button onclick="updateEmail()">Update Email</button>
+    <!-- ADDED: change password -->
+    <input type="password" id="current-password" placeholder="Current Password (optional)"/>
+    <input type="password" id="new-password" placeholder="New Password"/>
+    <button onclick="changePassword()">Change Password</button>
+
+    <button onclick="updateProfile()">Save Name</button>
+
+    <div class="stats">
+      <p>Points: <span id="profile-points">0</span></p>
+      <p>Pending Tasks: <span id="tasks-pending">0</span></p>
+      <p>Completed Tasks: <span id="tasks-completed">0</span></p>
+    </div>
+
+    <button class="back-btn" onclick="window.location.href='dashboard.html'">⬅ Back to Dashboard</button>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (!token) window.location.href = "login.html";
+      loadProfile();
+
+      // Handle picture upload
+      document.getElementById("upload-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        const file = document.getElementById("profile-pic-input").files[0];
+        if (!file) return alert("Please select an image");
+
+        formData.append("profilePic", file);
+
+        try {
+          const res = await fetch(`${API}/profile/upload`, {
+            method: "POST",
+            headers: { "Authorization": `Bearer ${token}` },
+            body: formData
+          });
+          if (res.ok) {
+            const data = await res.json();
+            document.getElementById("profile-pic").src = data.profilePic || document.getElementById("profile-pic").src;
+            alert("Profile picture updated!");
+            loadProfile();
+          } else {
+            alert("Failed to upload picture");
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      });
+    });
+
+    async function updateProfile() {
+      const name = document.getElementById("profile-name").value.trim();
+      if (!name) return alert("Name cannot be empty");
+
+      try {
+        const res = await fetch(`${API}/profile`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+          body: JSON.stringify({ name })
+        });
+        if (res.ok) {
+          alert("Profile updated!");
+          loadProfile();
+        } else {
+          alert("Failed to update profile");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  </script>
+</body>
+</html>
